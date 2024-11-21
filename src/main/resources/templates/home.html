@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+        }
+        nav a:hover {
+            background-color: #575757;
+            border-radius: 4px;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Pisi Bank</h1>
+        <p>Your trusted partner in financial growth</p>
+    </header>
+    <img src="" alt="">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+        <a href="/services">Services</a>
+        <a href="/contact">Contact</a>
+    </nav>
+    
+    <main>
+        <div class="container">
+            <h2>Empowering Your Financial Freedom</h2>
+            <p>
+                At Pisi Bank, we provide top-notch banking services tailored to meet your financial needs.
+                From savings accounts to personalized financial advice, we are here to support you every step of the way.
+            </p>
+            <p>
+                Explore our website to learn more about our services, or <a href="/contact">get in touch with us</a>.
+            </p>
+        </div>
+    </main>
+    <form action="/home" method="post">
+        <label for="id">id</label>
+        <input type="text" name="id" id="id">
+    </form>
+    <footer>
+        <p>&copy; 2024 Pisi Bank. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
