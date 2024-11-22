@@ -4,10 +4,7 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
-@DiscriminatorValue("SAVINGS")
 class SavingsAccount extends BankAccount{
-    @Id
     private int taux;
 
     SavingsAccount(int num, int cinClient, float balance, int taux) {

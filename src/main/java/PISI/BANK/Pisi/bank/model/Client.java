@@ -3,15 +3,12 @@ package PISI.BANK.Pisi.bank.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
 public class Client {
     
-    @Id
     private int cin;
-    private int phoneNumber;
-    private  String firstName, lastName;
+    private  String firstName, lastName, phoneNumber;
 
-    Client(int cin, String firstName, String lastName, int phoneNumber) {
+    Client(int cin, String firstName, String lastName, String phoneNumber) {
         this.cin = cin;
         this.firstName= firstName;
         this.lastName = lastName;
@@ -42,11 +39,11 @@ public class Client {
         return lastName;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getNumTel() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 

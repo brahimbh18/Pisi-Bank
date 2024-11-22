@@ -2,19 +2,9 @@ package PISI.BANK.Pisi.bank.model;
 
 import java.time.LocalDateTime;
 
-import org.hibernate.persister.entity.DiscriminatorType;
 
-import jakarta.persistence.DiscriminatorColumn;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
 
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "type", discriminatorType = jakarta.persistence.DiscriminatorType.STRING)
 public class BankAccount {
-    @Id  
     private int num;
     private int cinClient;
     private String date;
