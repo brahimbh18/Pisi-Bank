@@ -3,71 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Form</title>
+    <title>User Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f4f4f9;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
         }
         form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-        }
-        .form-group {
-            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
         }
         label {
-            display: block;
-            margin-bottom: 5px;
+            margin-top: 10px;
             font-weight: bold;
         }
         input {
-            width: 100%;
             padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            margin-top: 5px;
+            font-size: 16px;
         }
         button {
-            width: 100%;
+            margin-top: 20px;
             padding: 10px;
-            background-color: #007BFF;
+            font-size: 16px;
+            background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 4px;
             cursor: pointer;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
-    <h1>Registration Form</h1>
+
+    <h1>User Registration</h1>
     <form action="/register" method="POST">
+        <!-- CIN -->
+        <label for="cin">CIN:</label>
+        <input type="text" id="cin" name="cin" placeholder="Enter your CIN" required>
 
+        <!-- First Name -->
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
 
-        <div class="form-group">
-            <label for="cin">CIN</label>
-            <input type="text" id="cin" name="cin" placeholder="Enter your CIN" >
-        </div>
-        <div class="form-group">
-            <label for="cin">firstName</label>
-            <input type="text" id="firstName" name="firstName" placeholder="Enter your firstName" >
-        </div>
-        <div class="form-group">
-            <label for="cin">lastName</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Enter your lastName" >
-        </div>
-        <div class="form-group">
-            <label for="numTel">Numéro de Téléphone</label>
-            <input type="text" id="numTel" name="numTel" placeholder="Enter your phone number" >
-        </div>
+        <!-- Last Name -->
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+
+        <!-- Phone Number -->
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+        <!-- Password -->
+        <label for="password">Password:</label>
+        <input type="password" id="passwdHash" name="passwdHash" placeholder="Enter your password" required>
+
+        <!-- Submit Button -->
         <button type="submit">Submit</button>
     </form>
+
 </body>
 </html>

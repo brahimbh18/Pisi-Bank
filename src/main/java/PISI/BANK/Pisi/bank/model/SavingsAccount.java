@@ -5,18 +5,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 class SavingsAccount extends BankAccount{
-    private int taux;
+    private int interestRate;
 
-    SavingsAccount(int num, int cinClient, float balance, int taux) {
+    SavingsAccount(int num, int cinClient, float balance, int interestRate) {
         super(num, cinClient, balance);
-        this.taux = taux;
+        this.interestRate = interestRate;
     }
 
-    public void setTaux(int taux) {
-        this.taux = taux;
+    public void setInterestRate(int taux) {
+        this.interestRate= interestRate;
     }
 
-    public int getTaux() {
-        return taux;
+    public int getInterestRate() {
+        return interestRate;
     }
 }

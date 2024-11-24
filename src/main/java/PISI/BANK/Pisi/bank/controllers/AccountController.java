@@ -1,5 +1,6 @@
 package PISI.BANK.Pisi.bank.controllers;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,15 +13,28 @@ import java.sql.SQLException;
 public class AccountController {
     ClientService service;
     @PostMapping("/register")
-    public String register(@ModelAttribute Client client) throws SQLException {
-        System.out.println(client.getPhoneNumber());
-        ClientService.insertClient(client);
-        ClientService.showClients();
-        return "home";
+    public String register(@ModelAttribute Client client, HttpSession session) throws SQLException {
+//        System.out.println(client.getCin());
+//        System.out.println(client.getFirstName());
+//        System.out.println(client.getLastName());
+//        System.out.println(client.getPhoneNumber());
+//        System.out.println(client.getEmail());
+//        System.out.println(client.getPasswdHash());
+        if (ClientService.getClient(client.getCin()) == null) {
+//            ClientService.insertClient(client);
+//            session.setAttribute("client", client);
+            return "home";
+        }
+
+        return "exits";
     }
 
     @PostMapping("/login")
-    public String login() {
-        return "home";
+    public String login(@ModelAttribute Client client) throws SQLException {
+        if (ClientService.getClient(client.getCin()) != null) {
+
+            return "home";
+        }
+        return "index";
     }
 }

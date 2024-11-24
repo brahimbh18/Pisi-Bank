@@ -3,16 +3,20 @@ package PISI.BANK.Pisi.bank.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-public class Client {
+import java.io.Serializable;
+
+public class Client implements Serializable {
     
     private int cin;
-    private  String firstName, lastName, phoneNumber;
+    private  String firstName, lastName, phoneNumber, email, passwdHash;
 
-    Client(int cin, String firstName, String lastName, String phoneNumber) {
+    public Client(int cin, String firstName, String lastName, String phoneNumber, String email, String passwdHash) {
         this.cin = cin;
         this.firstName= firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.passwdHash = passwdHash;
     }
 
     public void setCin(int cin) {
@@ -47,6 +51,20 @@ public class Client {
         return phoneNumber;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setPasswdHash(String passwdHash) {
+        this.passwdHash = passwdHash;
+    }
+
+    public String getPasswdHash() {
+        return passwdHash;
+    }
 }
 

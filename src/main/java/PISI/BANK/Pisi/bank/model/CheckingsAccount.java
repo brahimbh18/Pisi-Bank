@@ -5,18 +5,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 class CheckingsAccount extends BankAccount{
-    private int decouverte;
+    private int overdraft;
 
-    CheckingsAccount(int num, int cinClient, float balance, int decouverte) {
+    CheckingsAccount(int num, int cinClient, float balance, int overdraft) {
         super(num, cinClient, balance);
-        this.decouverte = decouverte;
+        this.overdraft = overdraft;
     }
 
-    public void setDecouverte(int decouverte) {
-        this.decouverte = decouverte;
+    public void setOverdraft(int overdraft) {
+        this.overdraft = overdraft;
     }
 
-    public int getDecouverte() {
-        return decouverte;
+    public int getOverdraft() {
+        return overdraft;
     }
 }
