@@ -2,15 +2,15 @@ package PISI.BANK.Pisi.bank.model;
 
 import java.time.LocalDateTime;
 
-
-
 public class BankAccount {
     private int num;
     private int cinClient;
     private String date;
-    private float balance;
+    private double balance;
 
-    BankAccount(int num, int cinClient, float balance) {
+    public BankAccount() {}
+
+    public BankAccount(int num, int cinClient, float balance) {
         this.num = num;
         this.cinClient = cinClient;
         this.balance = balance;
@@ -33,11 +33,11 @@ public class BankAccount {
         return cinClient;
     }
 
-    public void setBalance(float balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return balance;
     }
 

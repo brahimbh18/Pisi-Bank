@@ -1,7 +1,7 @@
 package PISI.BANK.Pisi.bank.model;
 
 public class Transaction {
-    private int id, accountNum;
+    private int id, accountNum, receivingAccountNum;
     private String date, type; // type can be 'deposit', 'withdraw', or 'transfer'
     private double amount;
 
@@ -33,7 +33,35 @@ public class Transaction {
         this.date = date;
     }
 
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
     public double getAmount() {
         return amount;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setTargetAccountNum(Integer targetAccountNum) {
+        this.targetAccountNum = targetAccountNum;
+    }
+
+    public Integer getTargetAccountNum() {
+        return targetAccountNum;
+    }
+
+    public int getReceivingAccountNum() {
+        return receivingAccountNum;
+    }
+
+    public void setReceivingAccountNum(int receivingAccountNum) {
+        this.receivingAccountNum = receivingAccountNum;
     }
 }

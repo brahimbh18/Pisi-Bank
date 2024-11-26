@@ -1,14 +1,13 @@
 package PISI.BANK.Pisi.bank.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-
 import java.io.Serializable;
 
 public class Client implements Serializable {
     
     private int cin;
     private  String firstName, lastName, phoneNumber, email, passwdHash;
+
+    public Client() {}
 
     public Client(int cin, String firstName, String lastName, String phoneNumber, String email, String passwdHash) {
         this.cin = cin;

@@ -1,13 +1,13 @@
 package PISI.BANK.Pisi.bank.model;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 
-class CheckingsAccount extends BankAccount{
+
+public class CheckingsAccount extends BankAccount{
     private int overdraft;
 
-    CheckingsAccount(int num, int cinClient, float balance, int overdraft) {
+    public CheckingsAccount() {}
+
+    public CheckingsAccount(int num, int cinClient, float balance, int overdraft) {
         super(num, cinClient, balance);
         this.overdraft = overdraft;
     }

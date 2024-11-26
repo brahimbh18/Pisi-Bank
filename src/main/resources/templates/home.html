@@ -1,87 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
-        nav {
-            background-color: #333;
-            color: white;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            padding: 5px 10px;
-        }
-        nav a:hover {
-            background-color: #575757;
-            border-radius: 4px;
-        }
-        main {
-            padding: 20px;
-            text-align: center;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-    </style>
+    <title>PISI Bank - Home</title>
+    <link rel="stylesheet" href="styles.css">  <!-- Link to your custom CSS -->
 </head>
 <body>
+<!-- Header -->
 <header>
-    <h1>Welcome to Pisi Bank</h1>
-    <p>Your trusted partner in financial growth</p>
-</header>
-<img src="" alt="">
-<nav>
-    <a href="/">Home</a>
-    <a href="/about">About Us</a>
-    <a href="/services">Services</a>
-    <a href="/contact">Contact</a>
-</nav>
-
-<main>
-    <div class="container">
-        <h2>Empowering Your Financial Freedom</h2>
-        <p>
-            At Pisi Bank, we provide top-notch banking services tailored to meet your financial needs.
-            From savings accounts to personalized financial advice, we are here to support you every step of the way.
-        </p>
-        <p>
-            Explore our website to learn more about our services, or <a href="/contact">get in touch with us</a>.
-        </p>
+    <div class="logo">
+        <h1>PISI Bank</h1> <!-- Your bank logo or name -->
     </div>
-</main>
+    <nav>
+        <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/services">Services</a></li>
+        </ul>
+    </nav>
+</header>
 
+<!-- Hero Section -->
+<section id="hero">
+    <div class="hero-content">
+        <h2>Secure Your Future with PISI Bank</h2>
+        <p>Safe, fast, and easy banking at your fingertips.</p>
+        <div class="cta-buttons">
+            <a href="/register" class="cta-btn">Create an Account</a>
+            <a href="/login" class="cta-btn">Login Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Overview Section -->
+<section id="overview">
+    <h2>What We Offer</h2>
+    <div class="feature">
+        <img src="images/transfer.png" alt="Instant Transfers">
+        <h3>Instant Transfers</h3>
+        <p>Transfer money instantly between accounts, anytime, anywhere.</p>
+    </div>
+    <div class="feature">
+        <img src="images/security.png" alt="Secure Accounts">
+        <h3>Secure Accounts</h3>
+        <p>Our advanced encryption keeps your money and data safe.</p>
+    </div>
+    <div class="feature">
+        <img src="images/support.png" alt="24/7 Support">
+        <h3>24/7 Support</h3>
+        <p>Our customer support team is always available to assist you.</p>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about">
+    <h2>About Us</h2>
+    <p>PISI Bank was founded with the mission of providing secure, simple, and accessible financial services. Whether you’re looking to save, transfer, or invest, we’re here to help you every step of the way.</p>
+</section>
+
+<!-- Why Choose Us Section -->
+<section id="why-choose-us">
+    <h2>Why Choose PISI Bank?</h2>
+    <div class="reason">
+        <h3>Trust & Security</h3>
+        <p>We use the latest security measures to protect your data and money.</p>
+    </div>
+    <div class="reason">
+        <h3>Customer Satisfaction</h3>
+        <p>Our clients are our top priority. We’re committed to offering you the best service possible.</p>
+    </div>
+    <div class="reason">
+        <h3>Convenient Banking</h3>
+        <p>Access your accounts anytime, from anywhere. Banking has never been easier!</p>
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section id="cta">
+    <h2>Ready to Start?</h2>
+    <p>Join PISI Bank today and experience secure, easy, and reliable banking.</p>
+    <div class="cta-buttons">
+        <a href="/register" class="cta-btn">Create an Account</a>
+        <a href="/login" class="cta-btn">Login Now</a>
+    </div>
+</section>
+
+<!-- Footer -->
 <footer>
-    <p>&copy; 2024 Pisi Bank. All Rights Reserved.</p>
+    <p>&copy; 2024 PISI Bank | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+    <div class="social-media">
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+    </div>
 </footer>
 </body>
 </html>
