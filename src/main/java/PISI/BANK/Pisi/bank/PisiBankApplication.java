@@ -8,6 +8,7 @@ public class PisiBankApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PisiBankApplication.class, args);
+
 	}
 
 }

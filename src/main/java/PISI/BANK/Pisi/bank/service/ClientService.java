@@ -3,6 +3,7 @@ package PISI.BANK.Pisi.bank.service;
 import PISI.BANK.Pisi.bank.model.Client;
 import PISI.BANK.Pisi.bank.repositories.ClientRepository;
 //import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class ClientService {
         if (clientRepository.getClientByEmail(client.getEmail()) != null) {
             throw new IllegalArgumentException("Client with this email already exists.");
         }
-
+        client.setPasswdHash(BCrypt.hashpw(client.getPasswdHash(), BCrypt.gensalt()));
         // If no existing client, create the new client
         clientRepository.createClient(client);
     }
@@ -50,8 +51,7 @@ public class ClientService {
     public boolean authenticateClient(String email, String password) {
         Client client = clientRepository.getClientByEmail(email);
         if (client != null) {
-            return true;
-
+            return BCrypt.checkpw(password, client.getPasswdHash());
         }
         return false;
     }

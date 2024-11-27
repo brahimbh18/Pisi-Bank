@@ -15,6 +15,15 @@ public class ClientRepository {
     public ClientRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    public void testDatabase() {
+        String sql = "SELECT 1";
+        try {
+            jdbcTemplate.queryForObject(sql, Integer.class);
+            System.out.println("Database connection is working!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public Client getClientByCin(int cin) {
         String sql = "SELECT * FROM Client WHERE cin = ?";
@@ -32,6 +41,7 @@ public class ClientRepository {
     public void createClient(Client client) {
         String sql = "INSERT INTO Client (Cin, FirstName, LastName, PhoneNumber, Email, PasswordHash) VALUES (?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, client.getCin(), client.getFirstName(), client.getLastName(), client.getPhoneNumber(), client.getEmail(), client.getPasswdHash());
+        System.out.println("client created");
     }
 
     public void updateClient(Client client) {

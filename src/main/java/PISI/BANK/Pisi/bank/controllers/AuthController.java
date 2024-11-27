@@ -30,12 +30,15 @@ public class AuthController {
     @PostMapping("/register")
     public String registerClient(@ModelAttribute Client client) {
         if (clientService.getClientByCin(client.getCin()) != null) {
+            System.out.println("cin");
             return "redirect:/register?error=cinAlreadyExists";
         }
         if (clientService.getClientByEmail(client.getEmail()) != null) {
+            System.out.println("email");
             return "redirect:/register?error=emailAlreadyExists";
         }
         clientService.createClient(client);  // Call service to create client
+        System.out.println("created");
         return "redirect:/login";  // Redirect to login after successful registration
     }
 
@@ -49,9 +52,12 @@ public class AuthController {
     @PostMapping("/login")
     public String loginClient(@RequestParam String email, @RequestParam String password, HttpSession session) {
         if (clientService.authenticateClient(email, password)) {
+            System.out.println("done");
             session.setAttribute("authenticatedClient", email);  // Store client session
             return "redirect:/client/dashboard";  // Redirect to client dashboard after login
         }
+
+        System.out.println("not done");
         return "redirect:/login?error=invalidCredentials";  // Return to login page with error message
     }
 
