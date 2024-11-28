@@ -1,6 +1,11 @@
 package PISI.BANK.Pisi.bank.model;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
+
+@Component
 
 public class Client implements Serializable {
     

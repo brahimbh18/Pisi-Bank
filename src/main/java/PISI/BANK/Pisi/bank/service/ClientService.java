@@ -2,7 +2,6 @@ package PISI.BANK.Pisi.bank.service;
 
 import PISI.BANK.Pisi.bank.model.Client;
 import PISI.BANK.Pisi.bank.repositories.ClientRepository;
-//import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +18,7 @@ public class ClientService {
 
     public void createClient(Client client) {
         // Check if a client already exists with the same CIN or email
+
         if (clientRepository.getClientByCin(client.getCin()) != null) {
             throw new IllegalArgumentException("Client with this CIN already exists.");
         }
@@ -48,12 +48,12 @@ public class ClientService {
         clientRepository.deleteClient(cin);
     }
 
-    public boolean authenticateClient(String email, String password) {
+    public Client authenticateClient(String email, String password) {
         Client client = clientRepository.getClientByEmail(email);
         if (client != null) {
-            return BCrypt.checkpw(password, client.getPasswdHash());
+            return BCrypt.checkpw(password, client.getPasswdHash()) ? client : null;
         }
-        return false;
+        return null;
     }
 
     public List<Client> getAllClients() {

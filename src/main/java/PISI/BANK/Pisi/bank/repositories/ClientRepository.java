@@ -1,5 +1,6 @@
 package PISI.BANK.Pisi.bank.repositories;
 
+import PISI.BANK.Pisi.bank.config.DatabaseConfig;
 import PISI.BANK.Pisi.bank.model.Client;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,23 +13,19 @@ public class ClientRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public ClientRepository(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-    public void testDatabase() {
-        String sql = "SELECT 1";
-        try {
-            jdbcTemplate.queryForObject(sql, Integer.class);
-            System.out.println("Database connection is working!");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public ClientRepository() {
+        this.jdbcTemplate = DatabaseConfig.jdbcTemplate();
     }
 
     public Client getClientByCin(int cin) {
         String sql = "SELECT * FROM Client WHERE cin = ?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{cin}, new RowMappers.ClientRowMapper());
+        try {
+            return jdbcTemplate.queryForObject(sql, new Object[]{cin}, new RowMappers.ClientRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
+
 
     public Client getClientByEmail(String email) {
         String sql = "SELECT * FROM Client WHERE Email = ?";
