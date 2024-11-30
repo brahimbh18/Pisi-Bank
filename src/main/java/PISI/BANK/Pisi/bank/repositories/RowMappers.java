@@ -8,17 +8,17 @@ import java.sql.SQLException;
 
 public class RowMappers {
 
-    public static class ClientRowMapper implements RowMapper<Client> {
+    public static class CustomerRowMapper implements RowMapper<Customer> {
         @Override
-        public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
-            Client client = new Client();
-            client.setCin(rs.getInt("Cin"));
-            client.setFirstName(rs.getString("FirstName"));
-            client.setLastName(rs.getString("LastName"));
-            client.setPhoneNumber(rs.getString("PhoneNumber"));
-            client.setEmail(rs.getString("Email"));
-            client.setPasswdHash(rs.getString("PasswordHash"));
-            return client;
+        public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Customer customer = new Customer();
+            customer.setCin(rs.getInt("Cin"));
+            customer.setFirstName(rs.getString("FirstName"));
+            customer.setLastName(rs.getString("LastName"));
+            customer.setPhoneNumber(rs.getString("PhoneNumber"));
+            customer.setEmail(rs.getString("Email"));
+            customer.setPasswdHash(rs.getString("PasswordHash"));
+            return customer;
         }
     }
 
@@ -26,24 +26,14 @@ public class RowMappers {
         @Override
         public BankAccount mapRow(ResultSet rs, int rowNum) throws SQLException {
             String type =rs.getString("type");
-            BankAccount account;
-
-            if (("checkings").equalsIgnoreCase(type)) {
-                CheckingsAccount checkingsAccount = new CheckingsAccount();
-                checkingsAccount.setOverdraft(rs.getInt("overdraft"));
-                account = checkingsAccount;
-            } else if (("savings").equalsIgnoreCase(type)) {
-                SavingsAccount savingsAccount = new SavingsAccount();
-                savingsAccount.setInterestRate(rs.getInt("interestRate"));
-                account = savingsAccount;
-            } else {
-                throw new IllegalArgumentException("Unkown account type: " + type);
-            }
+            BankAccount account = new BankAccount();
 
             account.setNum(rs.getInt("num"));
-            account.setCinClient(rs.getInt("cinClient"));
+            account.setCustomerCin(rs.getInt("cinCustomer"));
             account.setDate(rs.getString("date"));
             account.setBalance(rs.getFloat("balance"));
+            account.setOverdraft(rs.getInt("overdraft"));
+            account.setInterestRate(rs.getInt("interestRate"));
             return account;
         }
     }

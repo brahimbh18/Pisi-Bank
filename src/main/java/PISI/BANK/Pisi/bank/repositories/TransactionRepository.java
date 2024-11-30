@@ -28,6 +28,11 @@ public class TransactionRepository {
         }
     }
 
+    public List<Transaction> getTransactionsByCin(int cin) {
+        String sql = "SELECT * FROM Transaction WHERE cin = ? GROUP BY cin ORDER BY date DESC";
+
+        return jdbcTemplate.query(sql, new Object[]{cin}, new RowMappers.TransactionRowMapper());
+    }
     // Fetch transactions for a given account
     public List<Transaction> getTransactionsByAccount(int accountNum) {
         String sql = "SELECT * FROM Transaction WHERE accountNum = ? ORDER BY date DESC";

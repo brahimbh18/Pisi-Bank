@@ -4,17 +4,22 @@ import java.time.LocalDateTime;
 
 public class BankAccount {
     private int num;
-    private int cinClient;
+    private int customerCin;
     private String date;
     private double balance;
+    String type;
+    private int overdraft, interestRate;
 
     public BankAccount() {}
 
-    public BankAccount(int num, int cinClient, float balance) {
-        this.num = num;
-        this.cinClient = cinClient;
-        this.balance = balance;
+    public BankAccount(int customerCin, String type, int overdraft, int interestRate) {
+        //this.num = num;
+        this.customerCin = customerCin;
+        this.balance = 0;
         this.date = LocalDateTime.now().toString();
+        this.type = type;
+        this.overdraft = overdraft;
+        this.interestRate = interestRate;
     }
 
     public void setNum(int num) {
@@ -25,12 +30,12 @@ public class BankAccount {
         return num;
     }
 
-    public void setCinClient(int cinClient) {
-        this.cinClient = cinClient;
+    public void setCustomerCin(int cinCustomer) {
+        this.customerCin = customerCin;
     }
 
-    public int getCinClient() {
-        return cinClient;
+    public int getCustomerCin() {
+        return customerCin;
     }
 
     public void setBalance(double balance) {
@@ -47,5 +52,28 @@ public class BankAccount {
 
     public String getDate() {
         return date;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setOverdraft(int overdraft) {
+        this.overdraft = overdraft;
+    }
+
+    public int getOverdraft() {
+        return overdraft;
+    }
+    public void setInterestRate(int interestRate) {
+        this.interestRate= interestRate;
+    }
+
+    public int getInterestRate() {
+        return interestRate;
     }
 }

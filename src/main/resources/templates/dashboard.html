@@ -90,26 +90,27 @@
 </head>
 <body>
 <header>
-    <h1>Welcome, <span th:text="${client.firstName}"></span> <span th:text="${client.lastName}"></span>!</h1>
+    <h1>Welcome, <span th:text="${customer.firstName}"></span> <span th:text="${customer.lastName}"></span>!</h1>
 </header>
 
 <main>
     <h2>Your Information</h2>
     <ul>
-        <li><strong>CIN:</strong> <span th:text="${client.cin}"></span></li>
-        <li><strong>First Name:</strong> <span th:text="${client.firstName}"></span></li>
-        <li><strong>Last Name:</strong> <span th:text="${client.lastName}"></span></li>
-        <li><strong>Phone Number:</strong> <span th:text="${client.phoneNumber}"></span></li>
-        <li><strong>Email:</strong> <span th:text="${client.email}"></span></li>
+        <li><strong>CIN:</strong> <span th:text="${customer.cin}"></span></li>
+        <li><strong>First Name:</strong> <span th:text="${customer.firstName}"></span></li>
+        <li><strong>Last Name:</strong> <span th:text="${customer.lastName}"></span></li>
+        <li><strong>Phone Number:</strong> <span th:text="${customer.phoneNumber}"></span></li>
+        <li><strong>Email:</strong> <span th:text="${customer.email}"></span></li>
     </ul>
-
+    <ul>
+    </ul>
     <h2>Update Your Info</h2>
-    <form method="post" th:action="@{/update-client}">
-        <input type="hidden" th:value="${client.cin}" name="cin" />
+    <form method="post" th:action="@{/update-customer}">
+        <input type="hidden" th:value="${customer.cin}" name="cin" />
         <label for="phoneNumber">Phone Number:</label>
-        <input type="text" id="phoneNumber" name="phoneNumber" th:value="${client.phoneNumber}" />
+        <input type="text" id="phoneNumber" name="phoneNumber" th:value="${customer.phoneNumber}" />
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" th:value="${client.email}" />
+        <input type="email" id="email" name="email" th:value="${customer.email}" />
         <button type="submit">Update</button>
     </form>
 </main>

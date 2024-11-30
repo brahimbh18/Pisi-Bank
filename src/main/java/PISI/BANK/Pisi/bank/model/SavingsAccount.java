@@ -6,7 +6,6 @@ public class SavingsAccount extends BankAccount{
     public SavingsAccount() {}
 
     public SavingsAccount(int num, int cinClient, float balance, int interestRate) {
-        super(num, cinClient, balance);
         this.interestRate = interestRate;
     }
 

@@ -5,6 +5,8 @@ import PISI.BANK.Pisi.bank.repositories.BankAccountRepository;
 import PISI.BANK.Pisi.bank.repositories.TransactionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BankAccountService {
 
@@ -14,6 +16,15 @@ public class BankAccountService {
     public BankAccountService(BankAccountRepository bankAccountRepository, TransactionRepository transactionRepository) {
         this.bankAccountRepository = bankAccountRepository;
         this.transactionRepository = transactionRepository;
+    }
+
+    public void createBankAccount(BankAccount newBankAccount) {
+        bankAccountRepository.createAccount(newBankAccount);
+    }
+
+    public List<BankAccount> getBankAccountsByCin(int cin) {
+        String sql = "SELECT * FROM BankAccount WHERE customerCin = ?";
+        return bankAccountRepository.getBankAccountsByCin(cin);
     }
 
     public void deposit(BankAccount account, double amount) {
