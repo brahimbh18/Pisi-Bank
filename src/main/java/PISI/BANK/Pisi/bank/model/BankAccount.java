@@ -3,14 +3,17 @@ package PISI.BANK.Pisi.bank.model;
 import java.time.LocalDateTime;
 
 public class BankAccount {
-    private int num;
+    private long num;
     private int customerCin;
     private String date;
     private double balance;
     String type;
     private int overdraft, interestRate;
 
-    public BankAccount() {}
+    public BankAccount() {
+        this.balance = 0;
+        this.date = LocalDateTime.now().toString();
+    }
 
     public BankAccount(int customerCin, String type, int overdraft, int interestRate) {
         //this.num = num;
@@ -22,15 +25,15 @@ public class BankAccount {
         this.interestRate = interestRate;
     }
 
-    public void setNum(int num) {
+    public void setNum(long num) {
         this.num = num;
     }
 
-    public int getNum() {
+    public long getNum() {
         return num;
     }
 
-    public void setCustomerCin(int cinCustomer) {
+    public void setCustomerCin(int customerCin) {
         this.customerCin = customerCin;
     }
 

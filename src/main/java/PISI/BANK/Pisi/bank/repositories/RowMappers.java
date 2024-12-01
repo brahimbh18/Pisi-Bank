@@ -29,7 +29,7 @@ public class RowMappers {
             BankAccount account = new BankAccount();
 
             account.setNum(rs.getInt("num"));
-            account.setCustomerCin(rs.getInt("cinCustomer"));
+            account.setCustomerCin(rs.getInt("customerCin"));
             account.setDate(rs.getString("date"));
             account.setBalance(rs.getFloat("balance"));
             account.setOverdraft(rs.getInt("overdraft"));
@@ -47,7 +47,7 @@ public class RowMappers {
             transaction.setDate(rs.getString("date"));
             transaction.setAmount(rs.getDouble("amount"));
             transaction.setType(rs.getString("type"));
-            transaction.setTargetAccountNum(rs.getObject("targetAccountNum", Integer.class)); // Can be null
+            transaction.setReceivingAccountNum(rs.getObject("recievingAccountNum", Integer.class)); // Can be null
             return transaction;
         }
     }

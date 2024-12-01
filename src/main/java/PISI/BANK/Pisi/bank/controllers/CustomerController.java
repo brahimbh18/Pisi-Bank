@@ -21,7 +21,7 @@ public class CustomerController {
     @GetMapping("/debug")
     public String test(@AuthenticationPrincipal UserDetails currentCustomer, Model model, HttpSession session) {
         System.out.println("current customer : " +currentCustomer);
-        System.out.println("session : " + session.getAttribute("customer"));
+        System.out.println("customer in session : " + session.getAttribute("customer"));
         model.addAttribute("customer", "jon doe");
         return "test";
     }

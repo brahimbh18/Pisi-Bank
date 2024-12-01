@@ -37,6 +37,14 @@ public class AuthController {
     // Handle registration
     @PostMapping("/register")
     public String registerCustomer(@ModelAttribute Customer customer, @ModelAttribute BankAccount bankAccount, @RequestParam String password) {
+        System.out.println("bankAccount info :");
+        System.out.println(customer.getCin());
+        System.out.println(bankAccount.getDate());
+        System.out.println(bankAccount.getOverdraft());
+        System.out.println(bankAccount.getInterestRate());
+        System.out.println(bankAccount.getType());
+        System.out.println(bankAccount.getBalance());
+        System.out.println("----------");
         try {
             if (customerService.getCustomerByCin(customer.getCin()) != null) {
                 System.out.println("CIN found");
@@ -49,9 +57,11 @@ public class AuthController {
 
             // If CIN and email are unique, create the customer
             customer.setPasswdHash(BCrypt.hashpw(password, BCrypt.gensalt()));
+            System.out.println(customer.getPasswdHash());
             customerService.createCustomer(customer);
             System.out.println("Customer created successfully");
             bankAccount.setCustomerCin(customer.getCin());
+            System.out.println(bankAccount.getCustomerCin());
             try {
                 bankAccountService.createBankAccount(bankAccount);
                 System.out.println("registered");
@@ -60,6 +70,7 @@ public class AuthController {
             }
 
         } catch (Exception e) {
+            System.out.println("/register error");
             System.out.println("Error: " + e.getMessage());
             return "redirect:/register?error=serverError";
         }
@@ -73,50 +84,26 @@ public class AuthController {
         return "login";  // Thymeleaf template for login form
     }
 
-    // Handle login (authentication)
-    @PostMapping("/login")
-    public String loginCustomer() {
-        Customer customer;
-        System.out.println("Login Login Login");
-//        try {
-//            System.out.println("aaaaaaaaaaaaaaaaaaa");
-//            customer = customerService.authenticateCustomer(email, password);
-//            if (customer != null) {
-//                System.out.println("done");
-//                session.setAttribute("authenticatedCustomer", customer);  // Store customer session
-//                return "redirect:/customer/dashboard";  // Redirect to customer dashboard after login
-//            }
-//            System.out.println("not done");
-//            return "redirect:/login?error=invalidCredentials";  // Return to login page with error message
-//        } catch (Exception e) {
-//            return "redirect:/login?err err err";
-//        }
-        return "dashboard";
-    }
-
     @PostMapping("debug")
     public String debug (@RequestParam String email, @RequestParam String password, HttpSession session, Model model){
-        System.out.println("email : " + email);
-        System.out.println("password : " + password);
+        System.out.println("we are in debug controller");
         Customer customer;
         List<BankAccount> bankAccounts;
-        try {
-            customer = customerService.authenticateCustomer(email, password);
+        customer = customerService.authenticateCustomer(email, password);
+        if (customer != null) {
+            System.out.println(customer);
+            System.out.println("successfull login");
             bankAccounts = bankAccountService.getBankAccountsByCin(customer.getCin());
-            if (customer != null) {
-                System.out.println("successfull login");
-                session.setAttribute("customer", customer);
-                //session.setAttribute("bankAccounts", bankAccounts);
+            session.setAttribute("customer", customer);
+            //session.setAttribute("bankAccounts", bankAccounts);
 
-                model.addAttribute("customer", customer);
-                //model.addAttribute("bankAccounts", bankAccounts);
-                System.out.println("customer in session : " + session.getAttribute("customer"));
-                return "dashboard";
-            }
-            return "login";
-        } catch (Exception e) {
-            return "redirect:/login?error=invalidCredentials";
+            model.addAttribute("customer", customer);
+            //model.addAttribute("bankAccounts", bankAccounts);
+            System.out.println("customer in session : " + session.getAttribute("customer"));
+            return "dashboard";
+
         }
+        return "redirect:/login?error=invalidCredentials";
     }
 
     // Logout
@@ -125,4 +112,5 @@ public class AuthController {
         session.invalidate();  // Invalidate the session
         return "redirect:/login";  // Redirect to login page after logout
     }
+
 }

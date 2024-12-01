@@ -1,12 +1,12 @@
 package PISI.BANK.Pisi.bank.model;
 
 public class Transaction {
-    private int id, accountNum, receivingAccountNum;
+    private int id;
+    private long accountNum, receivingAccountNum;
     private String date, type; // type can be 'deposit', 'withdraw', or 'transfer'
     private double amount;
 
     // In case the transaction is 'transfer', otherwise its null
-    private Integer targetAccountNum;
 
     // Getters and setters
     public int getId() {
@@ -17,11 +17,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public int getAccountNum() {
+    public long getAccountNum() {
         return accountNum;
     }
 
-    public void setAccountNum(int accountNum) {
+    public void setAccountNum(long accountNum) {
         this.accountNum = accountNum;
     }
 
@@ -49,19 +49,11 @@ public class Transaction {
         return type;
     }
 
-    public void setTargetAccountNum(Integer targetAccountNum) {
-        this.targetAccountNum = targetAccountNum;
-    }
-
-    public Integer getTargetAccountNum() {
-        return targetAccountNum;
-    }
-
-    public int getReceivingAccountNum() {
+    public long getReceivingAccountNum() {
         return receivingAccountNum;
     }
 
-    public void setReceivingAccountNum(int receivingAccountNum) {
+    public void setReceivingAccountNum(long receivingAccountNum) {
         this.receivingAccountNum = receivingAccountNum;
     }
 }

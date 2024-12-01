@@ -26,7 +26,6 @@ public class CustomerService {
         if (customerRepository.getCustomerByEmail(customer.getEmail()) != null) {
             throw new IllegalArgumentException("Customer with this email already exists.");
         }
-        customer.setPasswdHash(BCrypt.hashpw(customer.getPasswdHash(), BCrypt.gensalt()));
         // If no existing customer, create the new customer
         customerRepository.createCustomer(customer);
     }
@@ -53,7 +52,11 @@ public class CustomerService {
     public Customer authenticateCustomer(String email, String password) {
         Customer customer = customerRepository.getCustomerByEmail(email);
         if (customer != null) {
-            return BCrypt.checkpw(password, customer.getPasswdHash()) ? customer : null;
+            //System.out.println(BCrypt.hashpw(password, BCrypt.gensalt()));
+            System.out.println(customer.getPasswdHash());
+            customer = BCrypt.checkpw(password, customer.getPasswdHash()) ? customer : null;
+            System.out.println(customer);
+            return customer;
         }
         return null;
     }

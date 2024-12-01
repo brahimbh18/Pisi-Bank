@@ -19,18 +19,34 @@ public class BankAccountService {
     }
 
     public void createBankAccount(BankAccount newBankAccount) {
-        bankAccountRepository.createAccount(newBankAccount);
+
+        try {
+            newBankAccount.setNum(getNewRib());
+            bankAccountRepository.createAccount(newBankAccount);
+            System.out.println("successfull creation service");
+        } catch (Exception e) {
+            System.out.println("service error");
+        }
+    }
+
+    public long getNewRib() {
+        return bankAccountRepository.getLastRib() + 1L;
     }
 
     public List<BankAccount> getBankAccountsByCin(int cin) {
         String sql = "SELECT * FROM BankAccount WHERE customerCin = ?";
-        return bankAccountRepository.getBankAccountsByCin(cin);
+        try {
+            return bankAccountRepository.getBankAccountsByCin(cin);
+        } catch (Exception e) {
+            System.err.println("get bankaccounts by cin error :" + e);
+            return null;
+        }
     }
 
     public void deposit(BankAccount account, double amount) {
         account.setBalance(account.getBalance() + amount);
         bankAccountRepository.updateAccount(account);
-        transactionRepository.logTransaction(account.getNum(), amount, "deposit", null);
+        transactionRepository.logTransaction(account.getNum(), amount, "deposit", (Long)null);
     }
 
     public void withdraw(BankAccount account, double amount) {
@@ -39,7 +55,7 @@ public class BankAccountService {
         }
         account.setBalance(account.getBalance() - amount);
         bankAccountRepository.updateAccount(account);
-        transactionRepository.logTransaction(account.getNum(), -amount, "withdrawal", null);
+        transactionRepository.logTransaction(account.getNum(), -amount, "withdrawal", (Long)null);
     }
 
     public void transfer(BankAccount fromAccount, BankAccount toAccount, double amount) {

@@ -31,11 +31,12 @@ public class CustomerRepository {
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{email}, new RowMappers.CustomerRowMapper());
         } catch (EmptyResultDataAccessException e) {
+            System.err.println("getCustomerByEmailError : " + e);
             return null; // No customer found with that email
         }
     }
 
-    public Customer getCustomerByRib(int rib) {
+    public Customer getCustomerByRib(long rib) {
         String sql = "SELECT * FROM Customer as c, BankAccount as b WHERE num = ?";
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{rib}, new RowMappers.CustomerRowMapper());
@@ -46,6 +47,7 @@ public class CustomerRepository {
 
     public void createCustomer(Customer customer) {
         String sql = "INSERT INTO Customer (Cin, FirstName, LastName, PhoneNumber, Email, PasswordHash) VALUES (?, ?, ?, ?, ?, ?)";
+        System.out.println(customer.getPasswdHash());
         jdbcTemplate.update(sql, customer.getCin(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getPasswdHash());
         System.out.println("customer created");
     }

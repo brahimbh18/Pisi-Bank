@@ -27,20 +27,34 @@ public class BankAccountRepository {
         return jdbcTemplate.query(sql, new Object[]{cin}, new RowMappers.BankAccountRowMapper());
     }
 
+    public List<BankAccount> getAllBankAccounts() {
+        String sql = "SELECT * FROM BankAccount";
+        try {
+            return jdbcTemplate.query(sql, new RowMappers.BankAccountRowMapper());
+        } catch (Exception e) {
+            System.err.println("error : " + e);
+            return null;
+        }
+    }
+
     // Example method to create a new customer
     public void createAccount(BankAccount account) {
-        String sql = "INSERT INTO BankAccount (customerCin, date, balance, type, overdraft, interestRate) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
-
-        jdbcTemplate.update(sql,
-                account.getCustomerCin(),
-                account.getDate(),
-                account.getBalance(),
-                account.getType(),
-                account.getOverdraft(),
-                account.getInterestRate()
-        );
-        System.out.println("bank account created successfully");
+        String sql = "INSERT INTO BankAccount (num, customerCin, date, balance, type, overdraft, interestRate) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try {
+            jdbcTemplate.update(sql,
+                    account.getNum(),
+                    account.getCustomerCin(),
+                    account.getDate(),
+                    account.getBalance(),
+                    account.getType(),
+                    account.getOverdraft(),
+                    account.getInterestRate()
+            );
+            System.out.println("bank account created successfully");
+        } catch (Exception e) {
+            System.err.println("error : " + e);
+        }
     }
 
     public void updateAccount(BankAccount account) {
@@ -58,10 +72,15 @@ public class BankAccountRepository {
         jdbcTemplate.update(sql, num);
     }
 
-    public long getLastRib() {
-        String sql = "SELECT MAX(num) FROM Bank Account";
+    public Long getLastRib() {
+        String sql = "SELECT MAX(num) FROM BankAccount";
         long num;
-        num = jdbcTemplate.queryForObject(sql, Long.class);
-        return num;
+        try {
+            num = jdbcTemplate.queryForObject(sql, Long.class);
+            return num;
+        } catch (Exception e) {
+            System.out.println("rib error");
+        }
+        return 1111222233330000L;
     }
 }

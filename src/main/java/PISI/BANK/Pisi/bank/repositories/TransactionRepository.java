@@ -16,7 +16,7 @@ public class TransactionRepository {
     }
 
     // Log a new transaction (deposit, withdrawal, transfer)
-    public void logTransaction(int accountNum, double amount, String type, Integer receiverAccountNum) {
+    public void logTransaction(long accountNum, double amount, String type, long receiverAccountNum) {
         String sql;
         // Check if it's a transfer, and include receiver's account number if it is
         if ("transfer".equalsIgnoreCase(type)) {
@@ -34,7 +34,7 @@ public class TransactionRepository {
         return jdbcTemplate.query(sql, new Object[]{cin}, new RowMappers.TransactionRowMapper());
     }
     // Fetch transactions for a given account
-    public List<Transaction> getTransactionsByAccount(int accountNum) {
+    public List<Transaction> getTransactionsByAccount(long accountNum) {
         String sql = "SELECT * FROM Transaction WHERE accountNum = ? ORDER BY date DESC";
         return jdbcTemplate.query(sql, new Object[]{accountNum}, new RowMappers.TransactionRowMapper());
     }

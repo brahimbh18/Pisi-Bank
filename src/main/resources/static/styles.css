@@ -15,6 +15,9 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+fieldset{
+    background-color: wheat;
+}
 
 header nav ul {
     list-style-type: none;
@@ -50,6 +53,12 @@ header nav ul li a {
 
 #hero .cta-btn:hover {
     background-color: #45a049;
+}
+
+section {
+
+    width: 800px;
+    font-size: 30px;
 }
 
 /* Overview Section */
