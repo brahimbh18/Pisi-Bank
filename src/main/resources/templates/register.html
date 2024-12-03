@@ -1,78 +1,100 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Register - PISI Bank</title>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Account Registration</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-	<nav>
-		<a href="/">Home</a>
-		<a href="/login">Login</a>
-	</nav>
-</header>
-<div class="error" th:if="${param.error}">
-	<p th:if="${param.error == 'invalidCredentials'}">Invalid email or password.</p>
-	<p th:if="${param.error == 'serverError'}">An error occurred. Please try again later.</p>
-</div>
-<section class="form-section">
-	<h2>Register for an Account</h2>
-	<form action="/register" method="POST">
+  <div class="form-container">
+    <form id="customer-registration-form">
+      <fieldset>
+        <legend>Personal Information</legend>
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" name="firstName" required>
 
-		<fieldset>
-			<div class="form-group">
-				<label for="cin">CIN</label>
-				<input type="text" id="cin" name="cin" required>
-			</div>
-			<div class="form-group">
-				<label for="firstName">First Name</label>
-				<input type="text" id="firstName" name="firstName" required>
-			</div>
-			<div class="form-group">
-				<label for="lastName">Last Name</label>
-				<input type="text" id="lastName" name="lastName" required>
-			</div>
+        <label for="last-name">Last Name:</label>
+        <input type="text" id="last-name" name="lastName" required>
 
-			<div class="form-group">
-				<label for="password">Password</label>
-				<input type="password" id="password" name="password" required>
-			</div>
+        <label for="cin">CIN (National ID):</label>
+        <input type="text" id="cin" name="cin" required>
 
-		</fieldset>
-<br>
-		<fieldset>
-			<div class="form-group">
-				<label for="phoneNumber">Phone Number</label>
-				<input type="text" id="phoneNumber" name="phoneNumber" required>
-			</div>
-			<div class="form-group">
-				<label for="email">Email</label>
-				<input type="email" id="email" name="email" required>
-			</div>
-		</fieldset>
-		<br>
-		<fieldset>
-			<div class="form-group">
-				<label for="email">Type</label>
-				<input type="text" id="type" name="type" required>
-			</div>
-			<div class="form-group">
-				<label for="email">Overdaft</label>
-				<input type="number" id="overdraft" name="overdraft">
-			</div>
-			<div class="form-group">
-				<label for="email">InterestRate</label>
-				<input type="number" id="interestRate" name="interestRate">
-			</div>
-		</fieldset>
-		<button type="submit">Register</button>
-	</form>
-</section>
+        <label for="date-of-birth">Date of Birth:</label>
+        <input type="date" id="date-of-birth" name="dateOfBirth" required>
 
-<footer>
-	<p>&copy; 2023 PISI Bank</p>
-</footer>
+        <label for="place-of-birth">Place of Birth:</label>
+        <input type="text" id="place-of-birth" name="placeOfBirth" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="marital-status">Marital Status:</label>
+        <select id="marital-status" name="maritalStatus" required>
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Divorced">Divorced</option>
+          <option value="Widowed">Widowed</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Contact Information</legend>
+        <label for="phone-number">Phone Number:</label>
+        <input type="tel" id="phone-number" name="phoneNumber" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+      </fieldset>
+
+      <fieldset>
+        <legend>Employment and Income</legend>
+        <label for="job-type">Type of Job:</label>
+        <select id="job-type" name="jobType" required>
+          <option value="Liberal">Liberal Profession</option>
+          <option value="Employee">Employee</option>
+          <option value="Self-employed">Self-employed</option>
+          <option value="Unemployed">Unemployed</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="income-category">Annual Income (TND):</label>
+        <select id="income-category" name="incomeCategory" required>
+          <option value="Low">Low (Below 6,000 TND)</option>
+          <option value="Middle">Middle (6,000 - 15,000 TND)</option>
+          <option value="High">High (15,000 - 35,000 TND)</option>
+          <option value="Very High">Very High (Above 35,000 TND)</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Account Preferences</legend>
+        <label for="account-type">Account Type:</label>
+        <select id="account-type" name="accountType" required>
+          <option value="Savings">Savings</option>
+          <option value="Checking">Checking</option>
+          <option value="Business">Business</option>
+        </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Security</legend>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirmPassword" required>
+      </fieldset>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
 </body>
 </html>

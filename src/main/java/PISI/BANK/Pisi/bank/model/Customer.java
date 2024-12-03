@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Customer implements Serializable {
     
     private int cin;
-    private  String firstName, lastName, dateOfBirth, placeOfBirth, maritalStatus, gender, phoneNumber, email, passwdHash;
+    private  String firstName, lastName, dateOfBirth, placeOfBirth, maritalStatus, gender, phoneNumber, email, passwdHash, jobType, incomeCategory;
 
     public Customer() {}
 
@@ -89,12 +89,36 @@ public class Customer implements Serializable {
         return placeOfBirth;
     }
 
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
     public void setGender(String gender) {
         this.gender = gender;
     }
 
     public String getGender() {
         return gender;
+    }
+
+    public void setJobType(String jobType) {
+        this.jobType = jobType;
+    }
+
+    public String getJobType() {
+        return jobType;
+    }
+
+    public void setIncomeCategory(String incomeCategory) {
+        this.incomeCategory = incomeCategory;
+    }
+
+    public String getIncomeCategory() {
+        return incomeCategory;
     }
 }
 
