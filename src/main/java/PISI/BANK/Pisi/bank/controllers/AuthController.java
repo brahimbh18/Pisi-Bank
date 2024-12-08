@@ -98,7 +98,7 @@ public class AuthController {
             //session.setAttribute("bankAccounts", bankAccounts);
 
             model.addAttribute("customer", customer);
-            //model.addAttribute("bankAccounts", bankAccounts);
+            model.addAttribute("bankAccounts", bankAccounts);
             System.out.println("customer in session : " + session.getAttribute("customer"));
             return "dashboard";
 
@@ -113,4 +113,8 @@ public class AuthController {
         return "redirect:/login";  // Redirect to login page after logout
     }
 
+    @GetMapping("/deposit")
+    public String deposit(HttpSession session) {
+        return "deposit";  // Redirect to login page after logout
+    }
 }

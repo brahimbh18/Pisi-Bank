@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Pisi Online Bank</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1><a href="index.html">PISI ONLINE BANK</a></h1>
+        <div class="nav">
+            <ul>
+                <li><a href="login.html">Login</a></li>
+                <li class="register"><a href="register.html">Become a customer</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section -->
+    <div class="section">
+        <img src="logo.png" alt="">
+
+        <div class="formContainer">
+            <h2>Register</h2>
+            <form action="" method="post">
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <label for="first-name">First Name:</label>
+                    <input type="text" id="first-name" name="firstName" required>
+
+                    <label for="last-name">Last Name:</label>
+                    <input type="text" id="last-name" name="lastName" required>
+
+                    <label for="cin">CIN (National ID):</label>
+                    <input type="text" id="cin" name="cin" required>
+
+                    <label for="date-of-birth">Date of Birth:</label>
+                    <input type="date" id="date-of-birth" name="dateOfBirth" required>
+
+                    <label for="placeOfBirth">Place of Birth:</label>
+                    <select id="placeOfBirth" name="placeOfBirth" required>
+                        <option value="" disabled selected>Select your place of birth</option>
+                        <optgroup label="Tunisian Governorates">
+                            <!-- Governorates Options -->
+                            <option value="Tunis">Tunis</option>
+                            <option value="Sousse">Sousse</option>
+                            <!-- Add others as needed -->
+                        </optgroup>
+                        <optgroup label="Other">
+                            <option value="Not in Tunisia">Not in Tunisia</option>
+                        </optgroup>
+                    </select>
+
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <label for="phone-number">Phone Number:</label>
+                    <input type="tel" id="phone-number" name="phoneNumber" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Security</legend>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirmPassword" required>
+                </fieldset>
+
+                <button type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Pisi Online Bank. All rights reserved.</p>
+    </footer>
+</body>
+</html>

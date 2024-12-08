@@ -9,6 +9,8 @@ public class HomeController {
     // Handle the request for the home page
     @GetMapping("/")
     public String showHomePage() {
-        return "home"; // This corresponds to the "home.html" Thymeleaf template
+        return "index"; // This corresponds to the "home.html" Thymeleaf template
     }
+
+
 }
