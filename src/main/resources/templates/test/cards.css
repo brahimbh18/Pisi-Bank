@@ -1,0 +1,35 @@
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+.addBtn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addBtn img {
+    width: 50%;
+    height: auto;
+    object-fit: contain; /* Keeps the image's aspect ratio */
+}
+
+.addBtn {
+    display: flex;
+    justify-content: center; /* Center the icon horizontally */
+    align-items: center; /* Center the icon vertically */
+    width: 100%; /* Ensure the container fills the width */
+    height: 100%; /* Ensure the container fills the height */
+}
+
+.addBtn img {
+    width: 50%; /* Adjust this to fit your design */
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
