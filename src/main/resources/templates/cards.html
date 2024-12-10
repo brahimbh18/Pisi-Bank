@@ -19,11 +19,19 @@
             <ul>
                 <li>
                     <img src="icons/dashboard.png">
-                    <span><a href="dashboard.html">Dashboard</a></span>
+                    <span><a href="/dashboard">dashboard</a></span>
                 </li>
                 <li>
                     <img src="icons/cards.png">
-                    <span><a href="">Cards</a></span>
+                    <span><a href="/cards">Cards</a></span>
+                </li>
+                <li>
+                    <img src="icons/pay.png">
+                    <span><a href="/dashboard">e-payment</a></span>
+                </li>
+                <li>
+                    <img src="icons/deposit.png">
+                    <span><a href="cards">Recharge</a></span>
                 </li>
             </ul>
 
@@ -42,22 +50,22 @@
             <h2>Welcome, Brahim</h2>
             <div class="cards">
 
-                <div class="card">
+                <div class="card" th:each="account : ${bankAccounts}">
                     <div class="one">
-                        <img src="symbol.png">
+                        <img src="icons/symbol.png">
                         <span>Platinum debit</span>
                     </div>
                     <div class="two">
-                        <span>**** **** ***** 1234</span>
+                        <span th:text="'**** **** **** '+ ${account.num}"></span>
                     </div>
                     <div class="three">
                         <ul>
                             <li class="title">VALID THRU</li>
-                            <li class="info">12/23</li>
+                            <li class="info">12/25</li>
                         </ul>
                         <ul>
                             <li class="title">CARD HOLDER</li>
-                            <li class="info">Foulen Fouleni</li>
+                            <li class="info" th:text="${customer.firstName} + ' ' + ${customer.lastName}">Foulen Fouleni</li>
                         </ul>
                     </div>
                 </div>
@@ -71,5 +79,10 @@
             </div>
         </div>
     </section>
+
+    
+    <footer>
+        <p>&copy; 2024 PISI Online Bank. All rights reserved.</p>
+    </footer>
 </body>
 </html>

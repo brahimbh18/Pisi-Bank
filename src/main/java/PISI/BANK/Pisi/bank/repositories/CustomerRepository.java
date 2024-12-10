@@ -31,7 +31,6 @@ public class CustomerRepository {
         try {
             return jdbcTemplate.queryForObject(sql, new Object[]{email}, new RowMappers.CustomerRowMapper());
         } catch (EmptyResultDataAccessException e) {
-            System.err.println("getCustomerByEmailError : " + e);
             return null; // No customer found with that email
         }
     }
@@ -46,11 +45,37 @@ public class CustomerRepository {
     }
 
     public void createCustomer(Customer customer) {
-        String sql = "INSERT INTO Customer (Cin, FirstName, LastName, PhoneNumber, Email, PasswordHash) VALUES (?, ?, ?, ?, ?, ?)";
-        System.out.println(customer.getPasswdHash());
-        jdbcTemplate.update(sql, customer.getCin(), customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getPasswdHash());
-        System.out.println("customer created");
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer object cannot be null");
+        }
+
+        String sql = "INSERT INTO Customer (cin, firstName, lastName, dateOfBirth, placeOfBirth, maritalStatus, " +
+                "gender, phoneNumber, email, passwordHash, jobType, incomeCategory) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            jdbcTemplate.update(sql,
+                    customer.getCin(),
+                    customer.getFirstName(),
+                    customer.getLastName(),
+                    customer.getDateOfBirth(),
+                    customer.getPlaceOfBirth(),
+                    customer.getMaritalStatus(),
+                    customer.getGender(),
+                    customer.getPhoneNumber(),
+                    customer.getEmail(),
+                    customer.getPasswdHash(),
+                    customer.getJobType(),
+                    customer.getIncomeCategory()
+            );
+
+            System.out.println("Customer created successfully: " + customer.getCin());
+        } catch (Exception e) {
+            System.err.println("Failed to create customer: " + e.getMessage());
+            throw new RuntimeException("Error creating customer", e);
+        }
     }
+
 
     public void updateCustomer(Customer customer) {
         String sql = "UPDATE Customer SET FirstName = ?, LastName = ?, PhoneNumber = ?, Email = ?, PasswordHash = ? WHERE Cin = ?";

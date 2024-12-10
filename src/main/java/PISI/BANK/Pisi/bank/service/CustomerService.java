@@ -16,18 +16,22 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
-    public void createCustomer(Customer customer) {
+    public String createCustomer(Customer customer) {
         // Check if a customer already exists with the same CIN or email
 
         if (customerRepository.getCustomerByCin(customer.getCin()) != null) {
-            throw new IllegalArgumentException("Customer with this CIN already exists.");
+            System.out.println("Customer with this CIN already exists.");
+            return "cinAlreadyExists";
         }
 
         if (customerRepository.getCustomerByEmail(customer.getEmail()) != null) {
-            throw new IllegalArgumentException("Customer with this email already exists.");
+            System.out.println("Customer with this email already exists.");
+            return "emailAlreadyExists";
         }
+        customer.setPasswdHash(BCrypt.hashpw(customer.getPasswdHash(), BCrypt.gensalt()));
         // If no existing customer, create the new customer
         customerRepository.createCustomer(customer);
+        return "";
     }
 
     public Customer getCustomerByCin(int cin) {

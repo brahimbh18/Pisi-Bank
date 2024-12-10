@@ -6,7 +6,6 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="cards.css">
 </head>
 <body>
     <div class="header">
@@ -19,11 +18,20 @@
             <ul>
                 <li>
                     <img src="icons/dashboard.png">
-                    <span><a href="dashboard.html">Dashboard</a></span>
+                    <span><a href="/dashboard">Dashboard</a></span>
                 </li>
                 <li>
                     <img src="icons/cards.png">
-                    <span><a href="">Cards</a></span>
+                    <span><a href="cards">Cards</a></span>
+                </li>
+                
+                <li>
+                    <img src="icons/pay.png">
+                    <span><a href="/dashboard">e-payment</a></span>
+                </li>
+                <li>
+                    <img src="icons/deposit.png">
+                    <span><a href="cards">Recharge</a></span>
                 </li>
             </ul>
 
@@ -39,16 +47,20 @@
             </ul>
         </div>
         <div class="board">
-            <h2>Welcome, Brahim</h2>
-            <div class="cards">
+            <h2>Welcome, <span th:text="${customer.firstName}"></span></h2>
+            <div class="stat">
+                <div class="balance">
+                    <span>Banlance :</span>
+                    <div class="amount"><span th:text="${bankAccount.balance}"></span> TND</div>
+                </div>
 
                 <div class="card">
                     <div class="one">
-                        <img src="symbol.png">
+                        <img src="icons/symbol.png">
                         <span>Platinum debit</span>
                     </div>
                     <div class="two">
-                        <span>**** **** ***** 1234</span>
+                        <span th:text="XXXX-XXXX-XXXX- + ${bankAccount.num}"></span>
                     </div>
                     <div class="three">
                         <ul>
@@ -57,19 +69,17 @@
                         </ul>
                         <ul>
                             <li class="title">CARD HOLDER</li>
-                            <li class="info">Foulen Fouleni</li>
+                            <li class="info" th:text="${customer.firstName} + ' ' + ${customer.lastName}"></li>
                         </ul>
                     </div>
-                </div>
-                
-                
-                <div class="card add">
-                  <div class="addBtn">
-                      <img src="icons/add.png">
-                  </div>
+
                 </div>
             </div>
         </div>
     </section>
+
+    <footer>
+        <p>&copy; 2024 PISI Online Bank. All rights reserved.</p>
+    </footer>
 </body>
 </html>
