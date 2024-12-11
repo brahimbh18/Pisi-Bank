@@ -158,11 +158,18 @@ h2 {
 }
 
 
+
 .one span,
-.two span,
 .three li {
-    font-size: 1rem; /* Scale text appropriately */
+    font-size: 1rem; 
 }
+
+
+.two span {
+    font-size: 1.5rem;
+    padding-left: 1rem;
+}
+
 
 .three {
     display: flex;

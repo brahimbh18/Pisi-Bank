@@ -1,11 +1,15 @@
 package PISI.BANK.Pisi.bank.controllers;
 
+import PISI.BANK.Pisi.bank.config.CustomUserDetails;
 import PISI.BANK.Pisi.bank.model.BankAccount;
 import PISI.BANK.Pisi.bank.model.Customer;
 import PISI.BANK.Pisi.bank.service.BankAccountService;
 import PISI.BANK.Pisi.bank.service.CustomerService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,20 +32,20 @@ public class CustomerController {
 
 
     @PostMapping("/debug")
-    public String debug (@RequestParam String email, @RequestParam String password, HttpSession session, Model model){
-        Customer customer;
-        List<BankAccount> bankAccounts;
-        customer = customerService.authenticateCustomer(email, password);
+    public String debug (@AuthenticationPrincipal UserDetails currentCustomer, @RequestParam String email, @RequestParam String password, HttpSession session, Model model){
+        Customer customer = customerService.authenticateCustomer(email, password);
+
         if (customer != null) {
-            bankAccounts = bankAccountService.getBankAccountsByCin(customer.getCin());
-            session.setAttribute("customer", customer);
-            session.setAttribute("bankAccounts", bankAccounts);
-            session.setAttribute("bankAccount", bankAccounts.get(0));
+            List<BankAccount> bankAccounts = bankAccountService.getBankAccountsByCin(customer.getCin());
+
+            CustomUserDetails userDetails = new CustomUserDetails(customer);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
 
             model.addAttribute("customer", customer);
             model.addAttribute("bankAccounts", bankAccounts);
             model.addAttribute("bankAccount", bankAccounts.get(0));
-            System.out.println("customer in session : " + session.getAttribute("customer"));
             return "dashboard";
 
         }
@@ -49,55 +53,47 @@ public class CustomerController {
     }
 
 
-//    @PostMapping("/login")
-//    public String debug (@RequestParam String email, @RequestParam String password, HttpSession session, Model model){
-//        Customer customer;
-//        List<BankAccount> bankAccounts;
-//        System.out.println("email : " + email + "password : " + password);
-//        customer = customerService.authenticateCustomer(email, password);
-//        if (customer != null) {
-//            System.out.println("gooood");
-//            bankAccounts = bankAccountService.getBankAccountsByCin(customer.getCin());
-//            session.setAttribute("customer", customer);
-//            session.setAttribute("bankAccounts", bankAccounts);
-//            session.setAttribute("bankAccount", bankAccounts.get(0));
-//
-////            for (BankAccount b: bankAccounts) {
-////                System.out.println(b.getNum());
-////            }
-//
-//            model.addAttribute("customer", customer);
-//            model.addAttribute("bankAccounts", bankAccounts);
-//            model.addAttribute("bankAccount", bankAccounts.get(0));
-//            System.out.println("customer in session : " + session.getAttribute("customer"));
-//            return "dashboard";
-////
-////        }
-//        System.out.println("baad");
-//        return "redirect:/login?error=invalidCredentials";
-//    }
-
 
     @GetMapping("/dashboard")
-    public String dashboard(@AuthenticationPrincipal UserDetails currentCustomer, HttpSession session, Model model) {
-        Object sessionCustomer = session.getAttribute("customer");
-        if (sessionCustomer != null) {
-            System.out.println("dashboard success " + session.getAttribute("customer"));
-            model.addAttribute("customer", sessionCustomer);
-        } else {
-            System.out.println("No customer found in session.");
+    public String dashboard(@AuthenticationPrincipal CustomUserDetails currentCustomer, Model model) {
+        if (currentCustomer != null) {
+            Customer customer = currentCustomer.getCustomer();
+            List<BankAccount> bankAccounts = bankAccountService.getBankAccountsByCin(customer.getCin());
+
+            model.addAttribute("customer", customer);
+            model.addAttribute("bankAccounts", bankAccounts);
+            if (!bankAccounts.isEmpty()) {
+                model.addAttribute("bankAccount", bankAccounts.get(0));
+            } else {
+                model.addAttribute("bankAccount", null);
+            }
+            System.out.println(currentCustomer.getCustomer().toString());
+            return "dashboard";
         }
-        model.addAttribute("bankAccounts", session.getAttribute("bankAccounts"));
-        return "dashboard";
+        return "redirect:/login?error=notLoggedIn";
     }
 
     @GetMapping("/cards")
-    public String showCards(@AuthenticationPrincipal UserDetails currentCustomer, Model model, HttpSession session) {
+    public String showCards(@AuthenticationPrincipal CustomUserDetails currentCustomer, Model model) {
+        if (currentCustomer != null) {
+            Customer customer = currentCustomer.getCustomer();
+            List<BankAccount> bankAccounts = bankAccountService.getBankAccountsByCin(customer.getCin());
+            model.addAttribute("customer", customer);
+            model.addAttribute("bankAccounts", bankAccounts);
 
-        System.out.println("Customer in session: " + session.getAttribute("customer"));
+            return "cards";
+        }
+        System.out.println("current customer is " + currentCustomer);
+        return "redirect:/login?error=notLoggedIn";
+    }
+
+
+    @GetMapping("/addAccount")
+    public String addAccountPage(Model model, HttpSession session) {
         model.addAttribute("customer", session.getAttribute("customer"));
         model.addAttribute("bankAccounts", session.getAttribute("bankAccounts"));
-        return "cards";
+
+        return "addAccount";
     }
 
 

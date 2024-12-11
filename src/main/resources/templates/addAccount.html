@@ -7,11 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="cards.css">
-    <script>
-        document.getElementById('addAccount').addEventListener('click', () => {
-            window.location.href = '/addAccount';
-        });
-    </script>
+    <link rel="stylesheet" href="form.css">
 </head>
 <body>
     <div class="header">
@@ -53,38 +49,20 @@
         </div>
         <div class="board">
             <h2>Welcome, Brahim</h2>
-            <div class="cards">
+            <form action="/addAccount" method="post">
+                    <label for="account-type">Account Type:</label>
+                    <select id="account-type" name="type" required>
+                        <option value="" disabled selected>Select an account type</option>
+                        <option value="checkings">Checkings</option>
+                        <option value="savings">Savings</option>
+                    </select>
 
-                <div class="card" th:each="account : ${bankAccounts}">
-                    <div class="one">
-                        <img src="icons/symbol.png">
-                        <span>Platinum debit</span>
-                    </div>
-                    <div class="two">
-                        <span th:text="'**** **** **** '+ ${account.num}"></span>
-                    </div>
-                    <div class="three">
-                        <ul>
-                            <li class="title">VALID THRU</li>
-                            <li class="info">12/25</li>
-                        </ul>
-                        <ul>
-                            <li class="title">CARD HOLDER</li>
-                            <li class="info" th:text="${customer.firstName} + ' ' + ${customer.lastName}">Foulen Fouleni</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                
-                <div class="card add">
-                    <a href="/addAccount">
-                        <div class="addBtn">
-                            <img src="icons/add.png">
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+                    <label for="initial-deposit">Amount (TND):</label>
+                    <input type="number" id="initial-deposit" name="balance" required min="0" step="1">
+            
+                <button type="submit">Add account</button>
+            </form> 
+
     </section>
 
     

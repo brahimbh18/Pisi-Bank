@@ -1,35 +1,54 @@
 
 package PISI.BANK.Pisi.bank.config;
 
+import PISI.BANK.Pisi.bank.service.CustomerService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
 @Configuration
 public class SecurityConfig {
+
+    private final CustomerService customerService;
+
+    public SecurityConfig(CustomerService customerService) {
+        this.customerService = customerService;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()  // Updated method name
-                .requestMatchers("/dashboard").authenticated() // Protect /dashboard
-                .anyRequest().permitAll() // Allow other endpoints
+                .authorizeRequests()
+                .requestMatchers("/dashboard").authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .formLogin(form -> form
-                        .loginPage("/login")  // Optional, specify custom login page URL
-                        .defaultSuccessUrl("/dashboard", true)  // After login, redirect to /dashboard
-                        .permitAll() // Allow everyone to see the login page
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/dashboard", true)
+                        .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")  // Redirect after logout
+                        .logoutSuccessUrl("/")
                 )
-                .csrf(csrf -> csrf.disable()); // Disable CSRF for simplicity in dev
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .userDetailsService(customerService) // Use the CustomerService as UserDetailsService
+                .passwordEncoder(passwordEncoder())
+                .and()
+                .build();
     }
 
     @Bean
@@ -37,3 +56,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+

@@ -1,14 +1,18 @@
 package PISI.BANK.Pisi.bank.service;
 
+import PISI.BANK.Pisi.bank.config.CustomUserDetails;
 import PISI.BANK.Pisi.bank.model.Customer;
 import PISI.BANK.Pisi.bank.repositories.CustomerRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CustomerService {
+public class CustomerService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
 
@@ -56,10 +60,7 @@ public class CustomerService {
     public Customer authenticateCustomer(String email, String password) {
         Customer customer = customerRepository.getCustomerByEmail(email);
         if (customer != null) {
-            //System.out.println(BCrypt.hashpw(password, BCrypt.gensalt()));
-            System.out.println(customer.getPasswdHash());
             customer = BCrypt.checkpw(password, customer.getPasswdHash()) ? customer : null;
-            System.out.println(customer);
             return customer;
         }
         return null;
@@ -67,5 +68,16 @@ public class CustomerService {
 
     public List<Customer> getAllCustomers() {
         return customerRepository.getAllCustomers();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        String email = username;
+        Customer customer = customerRepository.getCustomerByEmail(email);
+        if (customer == null) {
+            throw new UsernameNotFoundException("Customer not found with EMAIL: " + email);
+        }
+
+        return new CustomUserDetails(customer);
     }
 }

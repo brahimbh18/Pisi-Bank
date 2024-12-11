@@ -120,7 +120,7 @@ h2 {
     animation: gradientMove 6s ease infinite;
     height: auto;
     display: flex;
-    padding: 2rem;
+    padding: 1rem;
     gap: 1rem;
     flex-direction: column;
     border-radius: 20px;
@@ -159,9 +159,14 @@ h2 {
 
 
 .one span,
-.two span,
 .three li {
-    font-size: 1rem; /* Scale text appropriately */
+    font-size: 1rem; 
+}
+
+
+.two span {
+    font-size: 1.5rem;
+    padding-left: 1rem;
 }
 
 .three {
